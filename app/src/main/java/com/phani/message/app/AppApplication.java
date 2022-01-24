@@ -22,4 +22,10 @@ public class AppApplication {
         return principal.getAttribute("login");
     }
 
+    @Bean
+    public CqlSessionBuilderCustomizer sessionBuilderCustomizer(DataStaxAstraProperties astraProperties) {
+        Path bundle = astraProperties.getSecureConnectBundle().toPath();
+        return builder -> builder.withCloudSecureConnectBundle(bundle);
+    }
+
 }
