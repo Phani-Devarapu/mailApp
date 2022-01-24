@@ -1,7 +1,11 @@
 package com.phani.message.app;
 
+import java.nio.file.Path;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -24,7 +28,7 @@ public class AppApplication {
 
     @Bean
     public CqlSessionBuilderCustomizer sessionBuilderCustomizer(DataStaxAstraProperties astraProperties) {
-        Path bundle = astraProperties.getSecureConnectBundle().toPath();
+        Path bundle = astraProperties.getSecureConnectMyCassaandra().toPath();
         return builder -> builder.withCloudSecureConnectBundle(bundle);
     }
 
